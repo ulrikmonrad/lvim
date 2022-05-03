@@ -52,14 +52,9 @@ lvim.builtin.dressing = { active = false } -- enable to override vim.ui.input an
 lvim.builtin.refactoring = { active = false } -- enable to use refactoring.nvim code_actions
 
 local user = os.getenv "USER"
-<<<<<<< HEAD
 if user and user == "elliot" then
-  lvim.builtin.nvim_web_devicons = { active = true }
-=======
-if user and user == "abz" then
   lvim.builtin.custom_web_devicons = true
-  lvim.use_icons = false -- only set to false if you know what are you doing
->>>>>>> 5e252947a9a3acafcd66c1ff6ccaefbf7d494009
+  lvim.use_icons = true -- only set to false if you know what are you doing
   lvim.builtin.sell_your_soul_to_devil = { active = true, prada = false }
   lvim.lsp.document_highlight = false
   lvim.builtin.csv_support = true
