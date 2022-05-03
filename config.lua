@@ -51,8 +51,8 @@ lvim.builtin.dressing = { active = false } -- enable to override vim.ui.input an
 lvim.builtin.refactoring = { active = false } -- enable to use refactoring.nvim code_actions
 
 local user = os.getenv "USER"
-if user and user == "abz" then
-  lvim.builtin.nvim_web_devicons = { active = false }
+if user and user == "elliot" then
+  lvim.builtin.nvim_web_devicons = { active = true }
   lvim.builtin.sell_your_soul_to_devil = { active = true, prada = false }
   lvim.lsp.document_highlight = false
   lvim.builtin.csv_support = true
@@ -60,7 +60,7 @@ if user and user == "abz" then
   lvim.builtin.dap.active = true
   lvim.builtin.sql_integration.active = true
   vim.g.instant_username = user
-  lvim.builtin.collaborative_editing.active = true
+  lvim.builtin.collaborative_editing.active = false
   lvim.builtin.file_browser.active = true
   lvim.builtin.global_statusline = true
   lvim.builtin.dressing.active = true
