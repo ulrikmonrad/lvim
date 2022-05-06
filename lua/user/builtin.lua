@@ -158,6 +158,7 @@ M.config = function()
     local function t(str)
       return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
+
     lvim.builtin.cmp.mapping["<c-h>"] = cmp.mapping(function()
       vim.api.nvim_feedkeys(vim.fn["copilot#Accept"](t "<Tab>"), "n", true)
     end)
@@ -524,7 +525,7 @@ M.config = function()
     separator = "·", -- symbol used between a key and it's label
     group = "", -- symbol prepended to a group
   }
-  lvim.builtin.which_key.setup.triggers = { "<leader>", "g", "z" }
+  lvim.builtin.which_key.setup.triggers = { "<leader>", "g", "z", "]", "[" }
   lvim.builtin.which_key.setup.ignore_missing = true
 
   -- ETC
@@ -551,13 +552,13 @@ function M.tab(fallback)
     cmp.select_next_item()
   elseif vim.api.nvim_get_mode().mode == "c" then
     fallback()
-  elseif copilot_keys ~= "" then -- prioritise copilot over snippets
-    -- Copilot keys do not need to be wrapped in termcodes
-    vim.api.nvim_feedkeys(copilot_keys, "i", true)
   elseif luasnip.expandable() then
     luasnip.expand()
   elseif methods.jumpable() then
     luasnip.jump(1)
+  elseif copilot_keys ~= "" then -- prioritise copilot over snippets
+    -- Copilot keys do not need to be wrapped in termcodes
+    vim.api.nvim_feedkeys(copilot_keys, "i", true)
   elseif methods.check_backspace() then
     fallback()
   else
