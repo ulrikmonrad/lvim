@@ -9,7 +9,7 @@ M.config = function()
   lightspeed.setup {
     -- jump_to_first_match = true,
     jump_to_unique_chars = { safety_timeout = 100 },
-    exit_after_idle_msecs = { labeled = 1500, unlabeled = 1000 },
+    exit_after_idle_msecs = { labeled = 1500, unlabeled = 1500 },
     -- highlight_unique_chars = true,
     -- grey_out_search_area = true,
     match_only_the_start_of_same_char_seqs = true,
@@ -23,6 +23,7 @@ M.config = function()
     labels = nil,
     cycle_group_fwd_key = nil,
     cycle_group_bwd_key = nil,
+    safe_labels = {"s", "?", "/", "U"}
   }
   require("user.keybindings").set_lightspeed_keymaps()
 end
