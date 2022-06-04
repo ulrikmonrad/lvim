@@ -55,7 +55,7 @@ local user = os.getenv "USER"
 if user and user == "elliot" then
   lvim.builtin.custom_web_devicons = true
   lvim.use_icons = true -- only set to false if you know what are you doing
-  lvim.builtin.sell_your_soul_to_devil = { active = true, prada = false }
+  lvim.builtin.sell_your_soul_to_devil = { active = true, prada = true }
   lvim.lsp.document_highlight = false
   lvim.builtin.csv_support = true
   lvim.builtin.async_tasks.active = true
