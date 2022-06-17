@@ -2,7 +2,8 @@
 -- =========================================
 lvim.format_on_save = false
 lvim.leader = " "
-lvim.colorscheme = "pablo"
+lvim.colorscheme = "pablo" -- set to a custom theme
+lvim.builtin.time_based_themes = true -- set false to use your own configured theme
 lvim.debug = false
 vim.lsp.set_log_level "warn"
 lvim.log.level = "warn"
@@ -51,10 +52,15 @@ lvim.builtin.editorconfig = { active = true } -- enable/disable editorconfig
 lvim.builtin.global_statusline = false -- set true to use global statusline
 lvim.builtin.dressing = { active = false } -- enable to override vim.ui.input and vim.ui.select with telescope
 lvim.builtin.refactoring = { active = false } -- enable to use refactoring.nvim code_actions
+lvim.builtin.tmux_lualine = false -- use vim-tpipeline to integrate lualine and tmux
 
 local user = os.getenv "USER"
 if user and user == "elliot" then
-  vim.opt.cmdheight = 0 -- WARN: only works with the latest neovim
+  lvim.builtin.tmux_lualine = true
+  if lvim.builtin.tmux_lualine then
+    vim.opt.cmdheight = 0 -- WARN: only works with the latest neovim
+    vim.g.tpipeline_cursormoved = 1
+  end
   lvim.builtin.custom_web_devicons = true
   lvim.use_icons = true -- only set to false if you know what are you doing
   -- lvim.builtin.sell_your_soul_to_devil = { active = true, prada = true }
