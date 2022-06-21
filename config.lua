@@ -76,7 +76,7 @@ if user and user == "elliot" then
   lvim.builtin.dressing.active = true
   lvim.builtin.fancy_wild_menu.active = true
   lvim.builtin.refactoring.active = true
-  require("lvim.lsp.manager").setup("prosemd_lsp", {})
+--  require("lvim.lsp.manager").setup("prosemd_lsp", {})
 end
 lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors
 lvim.builtin.latex = {
