@@ -27,6 +27,7 @@ M.config = function()
         right_align_padding = 7,
         highlight = "Comment",
       },
+      cargo = { allFeatures = true },
       hover_actions = {
         border = {
           { "╭", "FloatBorder" },
