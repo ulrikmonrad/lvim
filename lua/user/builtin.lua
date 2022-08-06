@@ -109,7 +109,7 @@ M.config = function()
 
   -- CMP
   -- =========================================
-  lvim.builtin.cmp.sources = {
+  lvim.builtin.cmp. ources = {
     { name = "nvim_lsp" },
     { name = "cmp_tabnine", max_item_count = 3 },
     { name = "buffer", max_item_count = 5, keyword_length = 5 },
@@ -130,6 +130,7 @@ M.config = function()
   }
   local cmp_sources = {
     ["vim-dadbod-completion"] = "(DadBod)",
+    nvim_lsp = "(LSP)",
     buffer = "(Buffer)",
     cmp_tabnine = "(TabNine)",
     crates = "(Crates)",
