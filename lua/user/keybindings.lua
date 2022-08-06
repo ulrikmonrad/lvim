@@ -181,6 +181,18 @@ end
 M.config = function()
   -- Additional keybindings
   -- =========================================
+
+  -- NO ARROW KEYS
+  lvim.keys.normal_mode["<Left>"] = ':echoe "Use h"<CR>'
+  lvim.keys.normal_mode["<Right>"] = ':echoe "Use l"<CR>'
+  lvim.keys.normal_mode["<Up>"] = ':echoe "Use k"<CR>'
+  lvim.keys.normal_mode["<Down>"] = ':echoe "Use j"<CR>'
+  lvim.keys.insert_mode["<Left>"] = '<ESC>:echoe "Use h"<CR>'
+  lvim.keys.insert_mode["<Right>"] = '<ESC>:echoe "Use l"<CR>'
+  lvim.keys.insert_mode["<Up>"] = '<ESC>:echoe "Use k"<CR>'
+  lvim.keys.insert_mode["<Down>"] = '<ESC>:echoe "Use j"<CR>'
+
+  -- =========================================
   lvim.keys.normal_mode["<CR>"] = {
     "<cmd>lua require('user.neovim').maximize_current_split()<CR>",
     { noremap = true, silent = true, nowait = true },
