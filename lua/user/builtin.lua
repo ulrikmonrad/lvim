@@ -199,7 +199,23 @@ M.config = function()
     lvim.keys.insert_mode["<M-\\>"] = { "<Cmd>vertical Copilot panel<CR>", { silent = true } }
     lvim.builtin.cmp.mapping["<Tab>"] = cmp.mapping(M.tab, { "i", "c" })
     lvim.builtin.cmp.mapping["<S-Tab>"] = cmp.mapping(M.shift_tab, { "i", "c" })
+    lvim.builtin.cmp.mapping["<C-c>"] = cmp.mapping({cmp.mapping.abort() and cmp.mapping.close(),
+      {"i", "c"}    })
+    lvim.builtin.cmp.mapping["<m-j>"] = cmp.mapping({cmp.mapping.abort() and cmp.mapping.close(),
+      {"i", "c"}    })
+    lvim.builtin.cmp.mapping["<m-k>"] = cmp.mapping({cmp.mapping.abort() and cmp.mapping.close(),
+      {"i", "c"}    })
+    lvim.builtin.cmp.mapping["<m-c>"] = cmp.mapping({cmp.mapping.abort() and cmp.mapping.close(),
+      {"i", "c"}    })
+    lvim.builtin.cmp.mapping["<C-b>"] = cmp.mapping({cmp.mapping.scroll_docs(-1) and cmp.mapping.close(),
+      {"i", "c"}    })
+    lvim.builtin.cmp.mapping["<C-f>"] = cmp.mapping({cmp.mapping.scroll_docs(1) and cmp.mapping.close(),
+      {"i", "c"}    })
+    lvim.builtin.cmp.mapping["<C-Space>"] = cmp.mapping({cmp.mapping.complete() {"i", "c"}})
+    lvim.builtin.cmp.mapping["<S-CR>"] = cmp.mapping({cmp.mapping.abort() and cmp.mapping.close() {"i", "c"}})
   end
+
+
 
   -- Comment
   -- =========================================
