@@ -23,7 +23,7 @@ lvim.builtin.fancy_statusline = { active = true } -- enable/disable fancy status
 lvim.builtin.fancy_wild_menu = { active = false } -- enable/disable cmp-cmdline
 lvim.builtin.fancy_diff = { active = false } -- enable/disable fancier git diff
 lvim.builtin.lua_dev = { active = true } -- change this to enable/disable folke/lua_dev
-lvim.builtin.test_runner = { active = true } -- change this to enable/disable vim-test, ultest
+lvim.builtin.test_runner = { active = true, runner = "ultest" } -- change this to enable/disable ultest or neotest
 lvim.builtin.cheat = { active = true } -- enable cheat.sh integration
 lvim.builtin.sql_integration = { active = false } -- use sql integration
 lvim.builtin.smooth_scroll = "cinnamon" -- for smoth scrolling, can be "cinnamon", "neoscroll" or ""
@@ -83,6 +83,8 @@ if user and user == "elliot" then
   lvim.builtin.fancy_wild_menu.active = true
   lvim.builtin.refactoring.active = true
   --  require("lvim.lsp.manager").setup("prosemd_lsp", {})
+  lvim.builtin.test_runner.runner = "neotest"
+  require("lvim.lsp.manager").setup("prosemd_lsp", {})
 end
 lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors
 lvim.builtin.latex = {
