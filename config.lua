@@ -57,6 +57,7 @@ lvim.builtin.lsp_lines = false -- enable/disable lsp_lines to display lsp virtua
 if lvim.builtin.lsp_lines then
   lvim.lsp.diagnostics.virtual_text = false
 end
+lvim.builtin.legendary = { active = false } -- enable/disable legendary plugin ( ctrl-p command )
 
 local user = os.getenv "USER"
 if user and user == "elliot" then
@@ -71,10 +72,8 @@ if user and user == "elliot" then
   lvim.use_icons = true -- only set to false if you know what are you doing
   -- lvim.builtin.sell_your_soul_to_devil = { active = true, prada = true }
   lvim.lsp.document_highlight = false
-  lvim.builtin.csv_support = true
   lvim.builtin.async_tasks.active = true
   lvim.builtin.dap.active = true
-  lvim.builtin.sql_integration.active = true
   vim.g.instant_username = user
   lvim.builtin.collaborative_editing.active = false
   lvim.builtin.file_browser.active = true
