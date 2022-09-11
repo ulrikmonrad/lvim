@@ -37,7 +37,7 @@ lvim.builtin.motion_provider = "hop" -- change this to use different motion prov
 lvim.builtin.hlslens = { active = false } -- enable/disable hlslens
 lvim.builtin.csv_support = false -- enable/disable csv support
 lvim.builtin.sidebar = { active = false } -- enable/disable sidebar
-lvim.builtin.async_tasks = { active = false } -- enable/disable async tasks
+lvim.builtin.task_runner = "" -- change this to use different task runners ( "async_tasks" or "overseer" or "")
 lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or ""
 lvim.builtin.metals = {
   active = false, -- enable/disable nvim-metals for scala development
@@ -77,7 +77,7 @@ if user and user == "elliot" then
   lvim.use_icons = true -- only set to false if you know what are you doing
   -- lvim.builtin.sell_your_soul_to_devil = { active = true, prada = true }
   lvim.lsp.document_highlight = false
-  lvim.builtin.async_tasks.active = true
+  lvim.builtin.task_runner = "async_tasks"
   lvim.builtin.dap.active = true
   vim.g.instant_username = user
   lvim.builtin.collaborative_editing.active = false
