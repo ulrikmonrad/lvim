@@ -2,7 +2,7 @@
 -- =========================================
 lvim.format_on_save = { pattern = "*.rs" }
 lvim.leader = " "
-lvim.colorscheme = "pablo" -- set to a custom theme
+lvim.colorscheme = "tokyonight" -- set to a custom theme
 lvim.builtin.time_based_themes = true -- set false to use your own configured theme
 lvim.transparent_window = false -- enable/disable transparency
 lvim.debug = false
@@ -39,7 +39,7 @@ lvim.builtin.hlslens = { active = false } -- enable/disable hlslens
 lvim.builtin.csv_support = false -- enable/disable csv support
 lvim.builtin.sidebar = { active = false } -- enable/disable sidebar
 lvim.builtin.task_runner = "" -- change this to use different task runners ( "async_tasks" or "overseer" or "")
-lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or ""
+lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or "navic" or ""
 lvim.builtin.metals = {
   active = false, -- enable/disable nvim-metals for scala development
   fallbackScalaVersion = "3.2.0-RC3",
@@ -60,6 +60,10 @@ if lvim.builtin.lsp_lines then
 end
 lvim.builtin.legendary = { active = false } -- enable/disable legendary plugin ( ctrl-p command )
 lvim.builtin.tree_provider = "nvimtree" -- can be "neo-tree" or "nvimtree" or ""
+lvim.builtin.lir.active = false
+lvim.builtin.breadcrumbs.active = false
+lvim.builtin.illuminate.active = false
+lvim.builtin.indentlines.active = true
 
 local user = os.getenv "USER"
 if user and user == "elliot" then
@@ -72,7 +76,7 @@ if user and user == "elliot" then
   vim.diagnostic.config { virtual_lines = false } -- i only want to use it explicitly ( by calling the toggle function)
   lvim.builtin.tmux_lualine = true
   if lvim.builtin.tmux_lualine then
-    vim.opt.cmdheight = 0 -- WARN: =0 only works with the latest neovim
+    vim.opt.cmdheight = 1 -- WARN: =0 is broken on neovim head (https://github.com/neovim/neovim/issues/20243)
     vim.g.tpipeline_cursormoved = 1
   end
   lvim.builtin.custom_web_devicons = true
@@ -98,6 +102,9 @@ if user and user == "elliot" then
   lvim.builtin.smooth_scroll = "cinnamon"
   lvim.builtin.tree_provider = "neo-tree"
   require("lvim.lsp.manager").setup("prosemd_lsp", {})
+end
+if lvim.builtin.winbar_provider == "navic" then
+  lvim.builtin.breadcrumbs.active = false
 end
 lvim.builtin.nvimtree.active = lvim.builtin.tree_provider == "nvimtree"
 lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors
