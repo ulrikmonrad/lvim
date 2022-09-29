@@ -401,18 +401,9 @@ M.config = function()
       opt = true,
       cmd = { "DiffviewOpen", "DiffviewFileHistory" },
       module = "diffview",
-      keys = "<leader>gd",
-      setup = function()
-        require("which-key").register { ["<leader>gd"] = "diffview: diff HEAD" }
-      end,
+      keys = { "<leader>gd", "<leader>gh" },
       config = function()
-        require("diffview").setup {
-          enhanced_diff_hl = true,
-          key_bindings = {
-            file_panel = { q = "<Cmd>DiffviewClose<CR>" },
-            view = { q = "<Cmd>DiffviewClose<CR>" },
-          },
-        }
+        require("user.diffview").config()
       end,
       disable = not lvim.builtin.fancy_diff.active,
     },
@@ -637,6 +628,14 @@ M.config = function()
       end,
       disable = lvim.builtin.tree_provider ~= "neo-tree",
     },
+    -- TODO: set this up when https://github.com/neovim/neovim/pull/20130 is merged
+    -- {
+    --   "lvimuser/lsp-inlayhints.nvim",
+    --   branch = "anticonceal",
+    --   config = function()
+    --     require("lsp-inlayhints").setup()
+    --   end,
+    -- },
   }
 end
 
