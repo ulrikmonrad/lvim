@@ -424,12 +424,6 @@ M.config = function()
       disable = not lvim.builtin.remote_dev.active,
     },
     {
-      "nathom/filetype.nvim",
-      config = function()
-        require("user.filetype").config()
-      end,
-    },
-    {
       "abzcoding/nvim-mini-file-icons",
       config = function()
         require("user.dev_icons").set_icon()
@@ -492,7 +486,7 @@ M.config = function()
           let g:asynctasks_extra_config = ['~/.config/lvim/tasks.ini']
         ]]
       end,
-      event = "BufRead",
+      event = { "BufRead", "BufNew" },
       disable = lvim.builtin.task_runner ~= "async_tasks",
     },
     {
