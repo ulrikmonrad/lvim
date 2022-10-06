@@ -64,6 +64,7 @@ lvim.builtin.lir.active = false
 lvim.builtin.breadcrumbs.active = false
 lvim.builtin.illuminate.active = false
 lvim.builtin.indentlines.active = true
+lvim.builtin.noice = { active = false }
 
 local user = os.getenv "USER"
 if user and user == "elliot" then
@@ -104,7 +105,8 @@ if user and user == "elliot" then
   }
   lvim.builtin.smooth_scroll = "cinnamon"
   lvim.builtin.tree_provider = "neo-tree"
-  require("lvim.lsp.manager").setup("prosemd_lsp", {})
+  lvim.builtin.noice.active = true
+  -- require("lvim.lsp.manager").setup("prosemd_lsp", {})
 end
 if lvim.builtin.winbar_provider == "navic" then
   vim.opt.showtabline = 1
