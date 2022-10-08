@@ -10,6 +10,9 @@ vim.lsp.set_log_level "warn"
 lvim.log.level = "warn"
 -- vim.o.conceallevel = 2 -- uncomment if you want to see concealed text
 require("user.neovim").config()
+lvim.lsp.code_lens_refresh = true
+lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors
+lvim.lsp.automatic_servers_installation = false
 
 -- Customization
 -- =========================================
@@ -64,74 +67,41 @@ lvim.builtin.lir.active = false
 lvim.builtin.breadcrumbs.active = false
 lvim.builtin.illuminate.active = false
 lvim.builtin.indentlines.active = true
+lvim.builtin.notify.active = true
 lvim.builtin.noice = { active = false }
-lvim.builtin.go_programming = { active = false } -- extra goodies for go programming
-lvim.builtin.python_programming = { active = false } -- extra goodies for python programming
+lvim.builtin.go_programming = { active = false } -- gopher.nvim + nvim-dap-go
+lvim.builtin.python_programming = { active = false } -- swenv.nvim + nvim-dap-python
+lvim.builtin.web_programming = { active = false } -- typescript.nvim + package-info.nvimconfig
+lvim.builtin.rust_programming = { active = false } -- rust_tools.nvim + crates.nvim
 
+-- Custom User Config
+-- =========================================
 local user = os.getenv "USER"
 if user and user == "elliot" then
-  -- WARN: these only work on neovim head
-  vim.opt.mousescroll = { "ver:1", "hor:6" }
-  vim.o.mousefocus = true
-  vim.o.mousemoveevent = true
-  ---
-
-  lvim.builtin.lsp_lines = true
-  vim.diagnostic.config { virtual_lines = false } -- i only want to use it explicitly ( by calling the toggle function)
-  lvim.builtin.tmux_lualine = true
-  if lvim.builtin.tmux_lualine then
-    vim.opt.cmdheight = 1
-    vim.opt.laststatus = 0
-    vim.g.tpipeline_cursormoved = 1
-    vim.g.tpipeline_clearstl = 1
-  end
-  lvim.builtin.custom_web_devicons = true
-  lvim.use_icons = true -- only set to false if you know what are you doing
-  -- lvim.builtin.sell_your_soul_to_devil = { active = true, prada = true }
-  lvim.lsp.document_highlight = false
-  lvim.builtin.task_runner = "async_tasks"
-  lvim.builtin.dap.active = true
-  vim.g.instant_username = user
-  lvim.builtin.collaborative_editing.active = false
-  lvim.builtin.file_browser.active = true
-  lvim.builtin.global_statusline = true
-  lvim.builtin.dressing.active = true
-  lvim.builtin.fancy_wild_menu.active = true
-  lvim.builtin.refactoring.active = true
-  --  require("lvim.lsp.manager").setup("prosemd_lsp", {})
-  lvim.builtin.test_runner.runner = "neotest"
-  lvim.format_on_save = {
-    pattern = "*.rs",
-    timeout = 2000,
-    filter = require("lvim.lsp.utils").format_filter,
-  }
-  lvim.builtin.smooth_scroll = "cinnamon"
-  lvim.builtin.tree_provider = "neo-tree"
-  lvim.builtin.noice.active = true
-  lvim.builtin.go_programming.active = true
-  lvim.builtin.python_programming.active = true
-  -- require("lvim.lsp.manager").setup("prosemd_lsp", {})
+  require("user.custom_user").config()
 end
+
+-- Additional Actions Based on Custom User Config
+-- =========================================
 if lvim.builtin.winbar_provider == "navic" then
   vim.opt.showtabline = 1
   lvim.keys.normal_mode["<tab>"] =
-    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal'})<cr>"
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal'})<cr>"
   lvim.builtin.bufferline.active = false
   lvim.builtin.breadcrumbs.active = true
 end
 lvim.builtin.nvimtree.active = lvim.builtin.tree_provider == "nvimtree"
-lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors
 lvim.builtin.latex = {
   view_method = "skim", -- change to zathura if you are on linux
   preview_exec = "/Applications/Skim.app/Contents/SharedSupport/displayline", -- change this to zathura as well
   rtl_support = true, -- if you want to use xelatex, it's a bit slower but works very well for RTL langs
 }
-lvim.builtin.notify.active = true
-lvim.lsp.automatic_servers_installation = false
 if lvim.builtin.cursorline.active then
   lvim.lsp.document_highlight = false
 end
-lvim.lsp.code_lens_refresh = true
+
+-- Override Lunarvim defaults
+-- =========================================
 require("user.builtin").config()
 
 -- StatusLine
@@ -171,6 +141,6 @@ require("user.plugins").config()
 -- =========================================
 require("user.autocommands").config()
 
--- Additional keybindings
+-- Additional Keybindings
 -- =========================================
 require("user.keybindings").config()
