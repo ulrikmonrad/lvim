@@ -67,13 +67,31 @@ M.config = function()
     }
   end
   if lvim.builtin.fancy_wild_menu.active then
-    cmp.setup.cmdline(":", {
+    local cmdline_opts = {
       mapping = cmp.mapping.preset.cmdline {},
       sources = {
         { name = "cmdline" },
         { name = "path" },
       },
-    })
+    }
+    if lvim.builtin.noice.active then
+      cmdline_opts.window = {
+        completion = {
+          border = {
+            { "╭", "CmpBorder" },
+            { "─", "CmpBorder" },
+            { "╮", "CmpBorder" },
+            { "│", "CmpBorder" },
+            { "╯", "CmpBorder" },
+            { "─", "CmpBorder" },
+            { "╰", "CmpBorder" },
+            { "│", "CmpBorder" },
+          },
+          winhighlight = "Search:None",
+        },
+      }
+    end
+    cmp.setup.cmdline(":", cmdline_opts)
   end
   cmp.setup.filetype("toml", {
     sources = cmp.config.sources({
@@ -213,7 +231,7 @@ M.config = function()
     { " ", "FloatBorder" },
     { " ", "FloatBorder" },
   }
-  if os.getenv "KITTY_WINDOW_ID" then
+  if vim.env.KITTY_WINDOW_ID then
     lvim.lsp.float.border = {
       { "🭽", "FloatBorder" },
       { "▔", "FloatBorder" },
@@ -355,14 +373,28 @@ M.config = function()
       lookahead = true,
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
+        ["aA"] = "@attribute.outer",
+        ["iA"] = "@attribute.inner",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
+        ["ac"] = "@call.outer",
+        ["ic"] = "@call.inner",
+        ["at"] = "@class.outer",
+        ["it"] = "@class.inner",
+        ["a/"] = "@comment.outer",
+        ["i/"] = "@comment.inner",
+        ["ai"] = "@conditional.outer",
+        ["ii"] = "@conditional.inner",
+        ["aF"] = "@frame.outer",
+        ["iF"] = "@frame.inner",
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
         ["al"] = "@loop.outer",
         ["il"] = "@loop.inner",
         ["aa"] = "@parameter.outer",
         ["ia"] = "@parameter.inner",
+        ["is"] = "@scopename.inner",
+        ["as"] = "@statement.outer",
         ["av"] = "@variable.outer",
         ["iv"] = "@variable.inner",
       },
@@ -487,7 +519,6 @@ M.config = function()
       ["<c-j>"] = actions.move_selection_next,
       ["<c-k>"] = actions.move_selection_previous,
       ["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-      ["<C-d>"] = require("telescope.actions").delete_buffer,
     },
     n = {
       ["<esc>"] = actions.close,
