@@ -35,9 +35,13 @@ M.config = function()
       enabled = not lvim.builtin.fancy_wild_menu.active,
     },
     notify = {
-      enabled = false,
+      enabled = lvim.builtin.notify.active,
     },
     routes = {
+      {
+        view = "notify",
+        filter = { event = "msg_showmode" },
+      },
       {
         filter = { event = "msg_show", kind = "search_count" },
         opts = { skip = true },
