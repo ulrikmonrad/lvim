@@ -129,10 +129,10 @@ M.catppuccin = function()
       },
       indent_blankline = {
         enabled = true,
-        colored_indent_levels = true,
+        colored_indent_levels = false,
       },
       gitsigns = lvim.builtin.gitsigns.active,
-      notify = lvim.builtin.notify.active,
+      notify = lvim.builtin.noice.active,
       nvimtree = true,
       neotree = lvim.builtin.tree_provider == "neo-tree",
       overseer = lvim.builtin.task_runner == "overseer",
@@ -144,6 +144,10 @@ M.catppuccin = function()
     highlight_overrides = {
       mocha = {
         NormalFloat = { fg = "#CDD6F4", bg = "#151521" },
+        CmpItemKindEnum = { fg = "#B4BEFE" },
+        CmpItemKindEnumMember = { fg = "#F5C2E7" },
+        CmpItemMenu = { fg = "#7F849C" },
+        CmpItemAbbr = { fg = "#BAC2DE" },
       },
     },
   }
@@ -183,16 +187,7 @@ M.kanagawa = function()
     overrides = {
       diffRemoved = { fg = "#E46876" },
       NvimTreeFolderIcon = { fg = "#7e9cd8" },
-
-      -- " highlight! link TSConstructor @constructor
-      -- " highlight! link TSProperty @property
-      -- " highlight! link TSField @field
-      -- " highlight! link TSInclude @include
-      -- " highlight! link TSKeyword @keyword
-      -- " highlight! link TSParameterReference @parameter
-      -- " highlight! link TSText @string
-      -- " highlight! link TSType @type
-      -- " highlight! link TSVariable @variable
+      CmpItemKindEnum = { fg = "#957FB8" },
     },
   }
 end
@@ -379,6 +374,10 @@ M.hi_colors = function()
 end
 
 M.telescope_theme = function()
+  local function link(group, other)
+    vim.cmd("highlight! link " .. group .. " " .. other)
+  end
+
   local function set_bg(group, bg)
     vim.cmd("hi " .. group .. " guibg=" .. bg)
   end
@@ -387,13 +386,25 @@ M.telescope_theme = function()
     vim.cmd("hi " .. group .. " guifg=" .. fg .. " guibg=" .. bg)
   end
 
+  set_fg_bg("SpecialComment", "#9ca0a4", "bold")
+  link("FocusedSymbol", "LspHighlight")
+  link("LspCodeLens", "SpecialComment")
+  link("LspDiagnosticsSignError", "DiagnosticError")
+  link("LspDiagnosticsSignHint", "DiagnosticHint")
+  link("LspDiagnosticsSignInfo", "DiagnosticInfo")
+  link("NeoTreeDirectoryIcon", "NvimTreeFolderIcon")
+  link("IndentBlanklineIndent1 ", "@comment")
+
   -- NOTE: these are my personal preferences
   if lvim.builtin.time_based_themes then
     local _time = os.date "*t"
     local current_colors = M.current_colors()
     set_fg_bg("CmpBorder", current_colors.cmp_border, current_colors.cmp_border)
     set_fg_bg("NoiceCmdlinePopupBorder", current_colors.cmp_border, current_colors.cmp_border)
-    set_fg_bg("NoiceCmdlinePopupSearchBorder", current_colors.cmp_border, current_colors.cmp_border)
+    set_fg_bg("NoiceCmdlinePopupBorderCmdline", current_colors.cmp_border, current_colors.cmp_border)
+    set_fg_bg("NoiceCmdlinePopupBorderFilter", current_colors.cmp_border, current_colors.cmp_border)
+    set_fg_bg("NoiceCmdlinePopupBorderLua", current_colors.cmp_border, current_colors.cmp_border)
+    set_fg_bg("NoiceCmdlinePopupBorderSearch", current_colors.cmp_border, current_colors.cmp_border)
     set_fg_bg("diffAdded", current_colors.git.add, "NONE")
     set_fg_bg("diffRemoved", current_colors.git.delete, "NONE")
     set_fg_bg("diffChanged", current_colors.git.change, "NONE")
