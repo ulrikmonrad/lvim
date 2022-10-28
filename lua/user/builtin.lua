@@ -76,7 +76,7 @@ M.config = function()
         return vim_item
       end
       vim_item.kind =
-        string.format("%s %s", kind.cmp_kind[vim_item.kind] or " ", cmp_sources[entry.source.name] or vim_item.kind)
+      string.format("%s %s", kind.cmp_kind[vim_item.kind] or " ", cmp_sources[entry.source.name] or vim_item.kind)
 
       return vim_item
     end
@@ -310,6 +310,12 @@ M.config = function()
   -- Mason
   -- =========================================
   lvim.builtin.mason.ui.icons = kind.mason
+
+  -- Noice
+  -- =========================================
+  if lvim.builtin.noice.active then
+    vim.lsp.handlers["textDocument/signatureHelp"] = require("noice.util").protect(require("noice.lsp").signature)
+  end
 
   -- NvimTree
   -- =========================================

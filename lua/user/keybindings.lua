@@ -225,7 +225,16 @@ M.config = function()
   }
   lvim.keys.insert_mode["<A-a>"] = "<ESC>ggVG<CR>"
   lvim.keys.insert_mode["jk"] = "<ESC>:w<CR>"
-  lvim.keys.insert_mode["<C-s>"] = "<cmd>lua vim.lsp.buf.signature_help()<cr>"
+  if lvim.builtin.noice.active then
+    lvim.keys.insert_mode["<C-s>"] = function()
+      local params = vim.lsp.util.make_position_params(0, "utf-16")
+      vim.lsp.buf_request(0, "textDocument/signatureHelp", params, function(err, result, ctx)
+        require("noice.lsp").signature(err, result, ctx, {
+          trigger = true,
+        })
+      end)
+    end
+  end
   lvim.keys.insert_mode["<A-s>"] =
     "<cmd>lua require('telescope').extensions.luasnip.luasnip(require('telescope.themes').get_cursor({}))<CR>"
   lvim.keys.command_mode["w!!"] = "execute 'silent! write !sudo tee % >/dev/null' <bar> edit!"
